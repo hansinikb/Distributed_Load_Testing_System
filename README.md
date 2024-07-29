@@ -20,6 +20,8 @@ web server. This system will use Kafka as a communication service.
 ![image](https://github.com/user-attachments/assets/527f5848-ee05-4f46-907a-8ed482fd26c8)
 
 ## Demo
+![image](https://github.com/user-attachments/assets/d7970baa-a43e-4f60-a9cb-842cd78ad90c)
+![image](https://github.com/user-attachments/assets/6aff66ef-c422-4d72-9525-8f76330e4100)
 
 ## Functionality
 
