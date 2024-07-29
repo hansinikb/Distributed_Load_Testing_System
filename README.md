@@ -1,4 +1,15 @@
-# Distributed Load Testing System
+# Distributed Load Testing System using Kafka
+## What is Kafka?
+Kafka is the solution for problems faced by distribution and scaling systems.
+The items sent and recieved (in a queue) through kafka must have a distribution strategy. 
+Say we have a queue which sends and revieves info. But if we need to scale it , what should we do?
+We can utilize kafka for this it allows distributing the queue into multiple queues called partitions.
+
+A server that holds one or more partition is called a broker.
+Each item in a partition is called a record. 
+Partition key decides which partition the item goes into. 
+A group of partitions handling the same type of data is called a topic. 
+Kafka also replicates partitions, so when a broker goes down, the replication of the partitions can be used.
 
 ## Goal
 
