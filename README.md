@@ -1,5 +1,5 @@
 # Distributed Load Testing System using Kafka
-## What is Kafka?
+## kafka intro
 Kafka is the solution for problems faced by distribution and scaling systems.
 The items sent and recieved (in a queue) through kafka must have a distribution strategy. 
 Say we have a queue which sends and revieves info. But if we need to scale it , what should we do?
