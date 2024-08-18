@@ -4,18 +4,24 @@ two types of load tests can be conducted, avalanche and tsunami. the tsunami tes
 
 
 1. Project Introduction:
-The project is a Distributed Load-Testing System designed to simulate high-concurrency, high-throughput scenarios on a web server to evaluate its performance under stress. This system allows users to orchestrate and execute complex load tests across multiple driver nodes in a scalable and coordinated manner. The project leverages Kafka as a messaging backbone for robust communication between the orchestrator and the driver nodes. The motivation behind this project stems from the increasing demand for scalable and reliable web services in the market, where load testing is essential to ensure that services can handle peak traffic without degrading performance or availability.
+The project is a Distributed Load-Testing System designed to simulate high-concurrency, high-throughput scenarios on a web server to evaluate its performance 
+under stress. This system allows users to orchestrate and execute complex load tests across multiple driver nodes in a scalable and coordinated manner. The 
+project leverages Kafka as a messaging backbone for robust communication between the orchestrator and the driver nodes. The motivation behind this project
+stems from the increasing demand for scalable and reliable web services in the market, where load testing is essential to ensure that services can handle 
+peak traffic without degrading performance or availability.
 
 2. Modules Description:
 The project is divided into several key modules:
 
-Orchestrator Module: Acts as the central controller, managing test configurations, distributing tasks to driver nodes, and aggregating results. It also exposes a REST API for initiating tests and viewing results.
+Orchestrator Module: Acts as the central controller, managing test configurations, distributing tasks to driver nodes, and aggregating results.
+It also exposes a REST API for initiating tests and viewing results.
 
 Driver Node Module: These nodes are responsible for generating the actual load on the target web server. Each driver node operates independently but in coordination with the orchestrator, sending a specified number of requests to the server and reporting back the performance metrics.
 
 Kafka Communication Module: Kafka is used for messaging between the orchestrator and driver nodes. Different Kafka topics are used to handle heartbeats, registrations, test configurations, triggers, and metrics, ensuring that the system is both scalable and fault-tolerant.
 
-WebSocket Module: Provides real-time updates to the users via a WebSocket connection, allowing them to monitor the progress and status of the load tests in real-time.
+WebSocket Module: Provides real-time updates to the users via a WebSocket connection, allowing them to monitor the progress and status of the load tests
+in real-time.
 
 3. Advantages and the Main Functionality of Your Application:
 The main functionality of this application is to perform distributed load testing in a scalable and automated manner. The key advantages include:
@@ -40,10 +46,12 @@ Deployment: Docker and Docker Compose for containerization
 Platform: Linux-based servers for hosting the application
 
 5. Personal Contribution and Your Role in the Project:
-I played a central role in the project, specifically in designing and implementing the Orchestrator Module. I was responsible for the integration with Kafka, handling test configurations, managing driver nodes, and aggregating metrics. I also implemented the WebSocket module for real-time communication, ensuring users could receive live updates on test progress.
+I played a central role in the project, specifically in designing and implementing the Orchestrator Module. I was responsible for the integration with Kafka, 
+handling test configurations, managing driver nodes, and aggregating metrics. I also implemented the WebSocket module for real-time communication, ensuring users
+could receive live updates on test progress.
 
 6. Challenges in the Project:
-One significant challenge was ensuring the fault tolerance of the system, particularly when dealing with network partitioning and Kafka message handling. To overcome this, I implemented robust error handling and retry mechanisms, ensuring that messages were not lost and the system could recover gracefully from failures. Another challenge was maintaining synchronization between the orchestrator and multiple driver nodes, which I addressed by fine-tuning Kafka’s partitioning and consumer group configurations.
+It would have been simpler to execute the project without implementing websockets, but since the professors wanted it we executed, without it we could have directly using http requests and responses
 
 7. The Number of People in the Project:
 The project was developed by a team of four. While each member had specific roles, we collaborated closely to integrate our modules and ensure the system's overall coherence. My role primarily focused on the orchestrator and communication infrastructure.
