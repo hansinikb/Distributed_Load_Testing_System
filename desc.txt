@@ -1,7 +1,4 @@
-this project aimed at building a distributed load testing system using kafka as the central communication service. this is relevent as the load tests need to be performed to tell how good a website is. this project is scalable as we can extend the driver nodes upto 9. we have implemented this using golang, which is the industries choice for building distributed systems.
-
-two types of load tests can be conducted, avalanche and tsunami. the tsunami tests were implemented in this way: we introduced a delay between each request using time.sleep
-
+kafka is a pub sub model that is used for communication in distributed systems.
 
 1. Project Introduction:
 The project is a Distributed Load-Testing System designed to simulate high-concurrency, high-throughput scenarios on a web server to evaluate its performance 
