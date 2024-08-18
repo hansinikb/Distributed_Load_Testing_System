@@ -52,6 +52,13 @@ could receive live updates on test progress.
 
 6. Challenges in the Project:
 It would have been simpler to execute the project without implementing websockets, but since the professors wanted it we executed, without it we could have directly using http requests and responses
+The client periodically sends HTTP GET requests to the server to check for new data.
+The interval between requests is determined by the client and can be adjusted based on the application's needs (e.g., every few seconds).
+but we implemented websockets as follows:
+WebSocket Connection Handling: The server upgrades HTTP connections to WebSocket connections using the Gorilla WebSocket toolkit and tracks active connections in a thread-safe manner.
+Real-Time Communication: WebSockets allow the server to push updates to clients instantly, enabling real-time monitoring of the load tests.
+Concurrency Management: The server uses a mutex to ensure that the map of active WebSocket clients is accessed and modified safely across multiple goroutines.
+Broadcasting Messages: The server can send messages to all connected clients, ensuring that they are all kept up-to-date with the latest information about the load tests.
 
 7. The Number of People in the Project:
 The project was developed by a team of four. While each member had specific roles, we collaborated closely to integrate our modules and ensure the system's overall coherence. My role primarily focused on the orchestrator and communication infrastructure.
