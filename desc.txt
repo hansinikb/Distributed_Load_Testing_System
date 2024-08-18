@@ -204,6 +204,29 @@ Latency Measurement: For each request, the latency (time taken for the request t
 Latency Storage: The measured latency is added to currentLatencies, and req is incremented to keep track of the total number of requests made.
 Concurrency Control: The current_latency_mutex ensures that adding latencies to currentLatencies is thread-safe.
 -----------------------------------------------
+
+     ENDPOINTS 
+
+Summary of Endpoints
+/ws: For establishing WebSocket connections.
+/tests: For submitting test configurations via POST requests.
+/trigger: For triggering load tests via POST requests.
+/ping: For checking server health.
+
+-------------------------------------------
+
+
+      METRICS
+
+"metrics": {
+    "mean_latency": "",
+    "median_latency": "",
+    "min_latency": "",
+    "max_latency": ""
+  }
+
+
+--------------------------------------------
 You said:
 tell about why you prefered these tools or technologies over others
 ChatGPT said:
