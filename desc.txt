@@ -145,6 +145,65 @@ Final Aggregation: This part of the code checks if metrics from all active nodes
 Broadcasting and Saving: The final aggregated metrics are broadcast to all connected clients using SendMessageToClients, and they are also saved to a JSON file for record-keeping.
 -----------------------------------------------
 
+     TSUNAMI TEST (main.go of driver)
+
+Setting Up the Test :-
+Interval Setup: The interval variable is set based on TestMessageDelay from the testConfig. This defines the delay between consecutive requests in milliseconds.
+Request Count: numRequests is set to the number of requests that each driver node should send, as specified in testConfig.
+URL: The target URL for the HTTP requests is set to "https://github.com" (this could be replaced with the actual URL being tested)   VVV IMP
+
+Metric Collection Arrays :-
+
+allLatencies: An array that accumulates the latencies of all requests sent during the test. This is used to calculate overall metrics like mean, min, and max latency.
+currentLatencies: An array that temporarily stores the latencies of requests sent during the current interval before the metrics are published.
+
+Metric Producer Setup :-
+Metric Producer: metricProducer is an instance of a MetricProducer, which is likely responsible for publishing metrics to some external system (e.g., a Kafka topic or a database).
+Goroutine for Metric Reporting: A separate goroutine is launched to periodically calculate and publish metrics based on the collected latencies. This allows the metrics to be reported asynchronously while the main loop continues to send requests.
+Metric Calculation: Inside the goroutine, if there are latencies in currentLatencies, the function calculates the mean, min, and max latency using the calculateLatencyMetrics function.
+Metric Message Creation: A MetricMessage struct is created and populated with the calculated metrics, the node ID, test ID, and the number of requests sent so far (req). This message is then published by the metricProducer.
+Reset: After publishing, the currentLatencies array is cleared, and req is reset to 0.
+
+Performing the HTTP Requests :-
+Request Loop: The main loop runs for the number of requests specified by numRequests.
+Latency Measurement: For each request, the time taken (latency) is measured by recording the time before and after the http.Get request and calculating the difference.
+Storing Latency: The measured latency is stored in currentLatencies, and the request counter (req) is incremented.
+Delay Between Requests: The time.After(interval) function introduces a delay between each request, simulating the controlled, gradual increase in load characteristic of a "Tsunami" test.
+
+-----------------------------------------------
+
+
+        
+
+     AVALANCHE TEST (main.go of driver)
+Function Initialization :-
+Request Counter: The variable req is initialized to count the number of requests made.
+Test Announcement: A message is printed to indicate the start of the Avalanche test for the given TestID.
+Target URL: The URL to which HTTP requests will be sent is set to "https://github.com" (this can be modified to the actual target server in a real test scenario).
+Number of Requests: The numRequests variable is set based on the MessageCountPerDriver in testConfig, indicating how many requests each node should send.
+
+
+Metric Collection Arrays :-
+allLatencies: This array stores the latency of all requests made during the test. It's used to calculate cumulative metrics like mean, min, and max latency.
+currentLatencies: This array temporarily stores the latencies for the current set of requests before they are aggregated and reported.
+
+
+Metric Producer Setup:-
+Metric Producer: An instance of MetricProducer is created. This object is responsible for publishing the calculated metrics to an external system (e.g., a database, a monitoring system, or a messaging queue like Kafka).
+
+Periodic Metric Reporting:-
+Goroutine for Metrics: A separate goroutine is used to periodically process and publish metrics based on the collected latencies.
+Locking: A mutex (current_latency_mutex) is used to ensure that access to the currentLatencies array is thread-safe, preventing race conditions when adding latencies or publishing metrics.
+Metric Calculation: The latencies are appended to allLatencies, and then the calculateLatencyMetrics function computes the mean, min, and max latency.
+Metric Message Creation: A MetricMessage is created, containing the calculated metrics, the node ID, and the test ID. This message is then published using the metricProducer.
+Reset for Next Interval: After publishing the metrics, the currentLatencies array is cleared, and req is reset for the next set of requests.
+
+Performing HTTP Requests:-
+Request Loop: The main loop sends the specified number of HTTP GET requests to the target URL.
+Latency Measurement: For each request, the latency (time taken for the request to complete) is measured by recording the time before and after the HTTP request.
+Latency Storage: The measured latency is added to currentLatencies, and req is incremented to keep track of the total number of requests made.
+Concurrency Control: The current_latency_mutex ensures that adding latencies to currentLatencies is thread-safe.
+-----------------------------------------------
 You said:
 tell about why you prefered these tools or technologies over others
 ChatGPT said:
