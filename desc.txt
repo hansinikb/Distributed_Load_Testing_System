@@ -59,6 +59,17 @@ WebSocket Connection Handling: The server upgrades HTTP connections to WebSocket
 Real-Time Communication: WebSockets allow the server to push updates to clients instantly, enabling real-time monitoring of the load tests.
 Concurrency Management: The server uses a mutex to ensure that the map of active WebSocket clients is accessed and modified safely across multiple goroutines.
 Broadcasting Messages: The server can send messages to all connected clients, ensuring that they are all kept up-to-date with the latest information about the load tests.
+----------------------------------------
+WebSocket Connection State Handling
+Connection Handling: The project establishes and maintains WebSocket connections effectively, but could benefit from more explicit handling of disconnections and reconnections.
+Disconnection Handling:explicitly remove clients from the active connections list when they disconnect.
+Reconnection Handling: (currently not implemented) The server should be prepared to accept reconnections from clients, with the client taking responsibility for attempting to reconnect.   [Reconnection Handling ------>>>>>>
+Client-Side Reconnection: Handling reconnections is typically the responsibility of the client. The client can attempt to reconnect if it detects that the WebSocket connection has been closed. This is not part of the server code, but you would need to ensure that the server is ready to accept new connections from clients that are attempting to reconnect.
+Server Readiness: Ensure that the server is capable of handling repeated connections from the same client. This might involve clearing out old connection state or ensuring that new connections do not encounter issues due to lingering old state<<<<<<]
+
+Dropped Connections: Error handling in message broadcasting is already implemented, ensuring that dropped connections are detected and handled by removing the client from the list.
+Network Interruptions: Periodic ping messages can help detect and handle network interruptions, ensuring that stale connections are closed.
+-----------------------------------------
 
 7. The Number of People in the Project:
 The project was developed by a team of four. While each member had specific roles, we collaborated closely to integrate our modules and ensure the system's overall coherence. My role primarily focused on the orchestrator and communication infrastructure.
@@ -67,12 +78,13 @@ The project was developed by a team of four. While each member had specific role
 The project took approximately three months from inception to completion. This included the time for planning, development, testing, and deployment. The initial phase focused on designing the system architecture, followed by iterative development and testing.
 
 9. Improvements in the Future for the Present System:
-In the future, the system could be enhanced by integrating AI-driven analytics to automatically detect performance bottlenecks during load testing. Additionally, support for multiple messaging backbones (e.g., RabbitMQ) could be added to increase flexibility. Another potential improvement is the introduction of a more user-friendly web-based GUI for configuring tests and viewing results, making the system more accessible to non-technical users.
+In the future, the system could handle Client-Side Reconnection: Handling reconnections is typically the responsibility of the client. The client can attempt to reconnect if it detects that the WebSocket connection has been closed.
 
 10. Drawbacks:
 One limitation of the current system is its reliance on Kafka, which, while robust, adds complexity to the deployment and management of the system. Also, the real-time WebSocket updates, while useful, could lead to performance issues under extremely high loads if not properly managed. However, these are areas identified for future optimization, and the system is designed with modularity in mind to allow for such improvements.
 
-
+Complexity in Implementation and Maintenance
+Stateful Connections: WebSockets require the server to maintain a persistent connection with each client, leading to increased complexity in managing these connections, particularly when scaling the application to handle many concurrent users.
 
 
 
