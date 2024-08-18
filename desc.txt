@@ -87,7 +87,7 @@ WebSockets: Could be layered on top of this infrastructure to provide real-time 
 The project was developed by a team of four. While each member had specific roles, we collaborated closely to integrate our modules and ensure the system's overall coherence. My role primarily focused on the orchestrator and communication infrastructure.
 
 8. Amount of Time It Took for the Project:
-The project took approximately three months from inception to completion. This included the time for planning, development, testing, and deployment. The initial phase focused on designing the system architecture, followed by iterative development and testing.
+The project took approximately three WEEKS from inception to completion. This included the time for planning, development, testing, and deployment. The initial phase focused on designing the system architecture, followed by iterative development and testing.
 
 9. Improvements in the Future for the Present System:
 In the future, the system could handle Client-Side Reconnection: Handling reconnections is typically the responsibility of the client. The client can attempt to reconnect if it detects that the WebSocket connection has been closed.
